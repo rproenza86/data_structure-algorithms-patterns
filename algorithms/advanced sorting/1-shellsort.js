@@ -157,15 +157,67 @@ class CArray {
             }
         }
     }
+    /**
+     * shellsort() with a dynamically computed gap sequence
+     * 
+     * In my test this method was more 10x faster
+     * 
+     * @memberof CArray
+     */
+    shellsortDynamic() {
+        const N = this.dataStore.length;
+        let h = 1;
+
+        while (h < N/3) {
+            h = 3 * h + 1;
+        }
+
+        while (h >= 1) {
+            for (let i = h; i < N; i++) {
+                for (let j = i; j >= h && this.dataStore[j] < this.dataStore[j-h]; j -= h) {
+                    swap(this.dataStore, j, j-h);
+                }
+            }
+            
+            h = (h-1)/3;
+        }
+    }
 }
 
-const nums = new CArray(10);
+let start, stop, elapsed;
+
+const nums = new CArray(10000);
 
 nums.setData();
 
-console.log("Before Shellsort: \n");
-console.log(nums.toString());
-console.log("\nDuring Shellsort: \n");
-nums.shellsort();
-console.log("\nAfter Shellsort: \n");
-console.log(nums.toString());
+console.group('Shellsort Ordered array');
+    console.log("Before Shellsort: \n");
+    console.log(nums.toString());
+
+    console.log("\nDuring Shellsort: \n");
+    start = new Date().getTime();
+        nums.shellsort();
+    stop = new Date().getTime();
+
+    console.log("\nAfter Shellsort: \n");
+    console.log(nums.toString());
+
+    elapsed = stop - start;
+    console.log(` \n The Shellsort elapsed time was: ${elapsed} milliseconds.`);
+console.groupEnd();//  The Shellsort elapsed time was: 33 milliseconds.
+
+console.group('Shellsort Ordered array with a dynamically computed gap sequence');
+    console.log("Before Shellsort: \n");
+    console.log(nums.toString());
+
+    console.log("\nDuring Shellsort: \n");
+    start = new Date().getTime();
+        nums.shellsortDynamic();
+    stop = new Date().getTime();
+
+    console.log("\nAfter Shellsort: \n");
+    console.log(nums.toString());
+
+    elapsed = stop - start;
+    console.log(` \n The Shellsort elapsed time was: ${elapsed} milliseconds.`);
+console.groupEnd();// The Shellsort elapsed time was: 2 milliseconds.
