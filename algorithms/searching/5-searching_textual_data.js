@@ -1,14 +1,7 @@
 /**
- * 
- * A binary search is used when the items in a list are in sorted order.
- * 
- * Binary search is the more efficient algorithm, but you also have to take into account the extra time 
- * it takes to sort the data set before being able to search it for a value.
- * 
- * To count how many occurrences an element has the easiest solution is to write two loops
- * that move both down, or to the left of, the data set, counting occurrences, and up, or
- * the right of, the data set, counting occurrences.
+ * All the search methods will work with words(strings) or digits(numbers)
  */
+
 class CArray {
     constructor(numElements) {
       this.dataStore = [];
@@ -21,10 +14,15 @@ class CArray {
       this.gaps = [5,3,1];
     }
   
-    setData() {
-      for (let i = 0; i < this.numElements; ++i) {
-        this.dataStore[i] = Math.floor(Math.random() * (this.numElements + 1));
-      }
+    setData(data = null) {
+        if (data.length){
+          this.dataStore = data;
+          this.numElements = data.length;
+        } else {
+          for (let i = 0; i < this.numElements; ++i) {
+            this.dataStore[i] = Math.floor(Math.random() * (this.numElements + 1));
+          }  
+        }
     }
   
     toString() {
@@ -468,25 +466,47 @@ class CArray {
     }
 }
 
-// Test the binary search algorithm:
-const nums = new CArray(100);
-nums.setData();
-nums.insertionSort();
+// Test:
+const text = 'The nationalism of Hamilton was undemocratic. The democracy of Jefferson was, in the beginning, provincial. The historic mission of uniting nationalism and democracy was in the course of time given to new leaders from a region beyond the mountains, peopled by men and women from all sections and free from those state traditions which ran back to the early days of colonization. The voice of the democratic nationalism nourished in the West was heard when Clay of Kentucky advocated his American system of protection for industries; when Jackson of Tennessee condemned nullification in a ringing proclamation that has taken its place among the great American state papers; and when Lincoln of Illinois, in a fateful hour, called upon a bewildered people to meet the supreme test whether this was a nation destined to survive or to perish. And it will be remembered that Lincoln\'s party chose for its banner that earlier device--Republican--which Jefferson had made a sign of power. The "rail splitter" from Illinois united the nationalism of Hamilton with the democracy of Jefferson, and his appeal was clothed in the simple language of the people, not in the sonorous rhetoric which Webster learned in the schools.';
+const words = text.split(" ");
 
-console.group('Generated array for the binary search algorithm:');
+const nums = new CArray(1);
+nums.setData(words);
+
+console.group('Generated array for searching a text using seqSearch():');
     console.log(nums.toString());
 console.groupEnd();
 
 
-console.group('Binary searching process:');
-    const num = parseInt(window.prompt("Enter a number to search for: "));
-    console.log(` \n We will search the number: ${num}\n`);
+console.group('seqSearch text searching process:');
+    let word = window.prompt("Enter a word to search for: ").trim();
+    console.log(` \n We will search the word: ${word}\n`);
 
-    const searchResult = nums.count(nums.dataStore, num);
+    let searchResult = CArray.seqSearch(nums.dataStore, word);
 
     if (searchResult) {
-        console.log(`The searched number "${num}" is in the array and it has ${searchResult} occurrences.\n`);
+        console.log(`The searched word "${word}" is in the array in the position ${searchResult}.\n`);
     } else {
-        console.log(`The searched number "${num}" is not in the array.\n`);
+        console.log(`The searched word "${word}" is not in the array.\n`);
     }
 console.groupEnd();
+
+console.group('binSearch text searching process:');
+    word = "Jefferson";
+    nums.insertionSort();
+
+    searchResult = nums.binSearch(nums.dataStore, word);
+
+    if (searchResult) {
+        console.log(`The searched word "${word}" is in the array in the position ${searchResult}.\n`);
+    } else {
+        console.log(`The searched word "${word}" is not in the array.\n`);
+    }
+console.groupEnd();
+
+/* 
+NOTE: It has been proven mathematically that binary search is faster than sequential
+search on large data sets just due to the fact that the binary search algorithm eliminates
+half the search space (the elements of the array) with each iteration of the loop that
+controls the algorithm
+*/
