@@ -89,5 +89,5 @@
         let values = [50, 140, 60, 60];
         let weights = [5, 20, 10, 12];
         let capacity = 30;
-        
-        print(ksack(values, weights, capacity)); // displays 220
+
+        console.log(ksack(values, weights, capacity)); // displays 220
