@@ -140,7 +140,7 @@
         
                     // only register classes that fulfill the vehicle contract
                     if ( proto.drive && proto.breakDown ) {
-                        types[type] = Object.assign({}, Vehicle); // here I'm not modifying the object model just storing a copy
+                        types[type] = Vehicle;
                     }
 
                     return abstractVehicleFactory;
