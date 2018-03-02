@@ -121,3 +121,97 @@ module.exports = {
         return A;
 	}
 };
+
+
+
+
+
+
+
+/**
+ * SYMMETRY
+ * Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).
+
+    Example :
+
+        1
+    / \
+    2   2
+    / \ / \
+    3  4 4  3
+    The above binary tree is symmetric. 
+    But the following is not:
+
+        1
+    / \
+    2   2
+    \   \
+    3    3
+    Return 0 / 1 ( 0 for false, 1 for true ) for this problem
+ */
+// Definition for a  binary tree node
+//			function TreeNode(data){
+//				this.data = data
+//				this.left = null
+//				this.right = null
+//			}
+
+// not optimums 
+module.exports = { 
+	//param A : root node of tree
+	//return an integer
+	isSymmetric : function(A){
+	    var simetry = 0;
+	    
+	    if(A == null) return simetry;
+	    
+	    var leftSubtree = [];
+	    var rightSubtree = [];
+	    
+        function isSym(node1, node2) {
+            if(node1 == null && node2 == null) return true;
+            
+            if(node1 && 
+               node2 && 
+               isSym(node1.left, node2.right) && 
+               isSym(node1.right, node2.left)) {
+                return true;    
+            }
+            
+            return false;
+        }
+        
+        simetry = isSym(A.left, A.right) ? 1 : 0;
+        
+        return simetry;
+	}
+};
+
+// not optimums 
+module.exports = { 
+	//param A : root node of tree
+	//return an integer
+	isSymmetric : function(A){
+	    var simetry = 0;
+	    
+	    if(A == null) return simetry;
+	    
+        function isSym(node1, node2) {
+            
+    	    if (node1 == null && node2 == null)
+    	        return true;
+    	        
+    	    if (node1 == null || node2 == null)
+    	        return false;
+    	    
+    	    if (node1.val != node2.val)
+    	        return false;
+    	    
+    	    return isSym(node1.left, node2.right) && isSym(node1.right, node2.left);
+        }
+        
+        simetry = isSym(A.left, A.right) ? 1 : 0;
+        
+        return simetry;
+	}
+};

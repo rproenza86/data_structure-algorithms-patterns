@@ -140,7 +140,7 @@ console.log("Back of queue: " + q.back()); // Back of queue: Jennifer
             console.log("There are " + maleDancers.count() +
             " male dancers waiting to dance.");
         } else{
-            console.log("The female queue is empty");
+            console.log("The male queue is empty");
         }
         if (femaleDancers.count() > 0) {
             console.log("There are " + femaleDancers.count() +

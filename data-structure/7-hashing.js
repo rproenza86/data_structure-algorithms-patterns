@@ -304,12 +304,12 @@ do {
             var hash = this.betterHash(key);
 
             if (this.table[hash][index] == key) {
-                return this.table[pos][index];
+                return this.table[hash][index];
             } else {
-                while (this.table[pos][index] != key) {
+                while (this.table[hash][index] != key) {
                     ++index;
                 }
-                return this.table[pos][index];
+                return this.table[hash][index];
             }
             return undefined;
         }

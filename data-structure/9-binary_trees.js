@@ -92,7 +92,6 @@
          *      2. If the data value in the inserted node is less than the data value in the current node,
          *      set the new current node to be the left child of the current node. If the data value
          *      in the inserted node is greater than the data value in the current node, skip to step
-         *      4.
          * 
          *      3. If the value of the left child of the current node is null, insert the new node here
          *      and exit the loop. Otherwise, skip to the next iteration of the loop.
@@ -407,7 +406,7 @@
          * One use of a BST is to keep track of the occurrences of data in a data set. For example,
             we can use a BST to record the distribution of grades on an exam. Given a set of exam
             grades, we can write a program that checks to see if the grade is in the BST, adding the
-            grade to the BST if it is not found, and incrementing the number of occurrrences of it
+            grade to the BST if it is not found, and incrementing the number of occurrences of it
             if the grade is found in the BST.
 
             To solve this problem, we need to modify the Node object to include a field for keeping
