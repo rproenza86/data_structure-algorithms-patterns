@@ -77,7 +77,7 @@ function simpleHash(data = '') {
 /**
  * Compute hash value
  * 
- * Avoid collisions(key repetitions issues):
+ * Avoid collisions(key repetition issue):
  *  1- The hash table is sized to a prime number >= 137
  *  2- Using the algorithm known as Horner’s.
  * 
@@ -358,7 +358,7 @@ do {
 
         hTable.showDistro();
     /**
-     * Linear Probing
+     * Linear Probing(is not my preference)
      * 
      * With linear probing, when there is a collision, the program simply looks to see if the next
         element of the hash table is empty. If so, the key is placed in that element. If the element
@@ -405,7 +405,7 @@ do {
             var n = 0;
             console.group(label);
                 for (var i = 0; i < this.table.length; ++i) {
-                    if (this.table[i][0] != undefined) {
+                    if (this.table[i] != undefined) {
                     console.log(i + ": " + this.table[i]);
                     }
                 }
@@ -436,10 +436,11 @@ do {
           hash = this.betterHash(key);
 
           if (hash > -1) {
-            for (var i = hash; this.table[hash] != undefined; i++) { // TODO: check stop condition
-              if (this.table[hash] == key) {
-                return this.values[hash];
-              }
+            while(this.table[hash] != undefined) {
+                if (this.table[hash] == key) {
+                  return this.values[hash];
+                }
+                hash++; 
             }
           }
           return undefined;
@@ -458,3 +459,7 @@ do {
         }
 
         hTable.showDistro();
+
+        hTable.get('David');
+        hTable.get('Jonathan');
+        hTable.get('Mike');

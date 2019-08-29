@@ -1,70 +1,70 @@
 /**
  * The Quicksort Algorithm
- * 
+ *
  * The Quicksort algorithm is one of the fastest sorting algorithms for large data sets.
- * 
+ *
  * Quicksort is a divide-and-conquer algorithm that recursively breaks a list of data into
  * successively smaller sublists consisting of the smaller elements and the larger elements.
  * The algorithm continues this process until all the data in the list is sorted.
- * 
+ *
  * The algorithm divides the list into sublists by selecting one element of the list as a pivot.
  * Data is sorted around the pivot by moving elements less than the pivot to the bottom
  * of the list and elements that are greater than the pivot to the top of the list.
- * 
+ *
  */
 class CArray {
     constructor(numElements) {
       this.dataStore = [];
       this.pos = 0;
       this.numElements = numElements;
-  
+
       for (var i = 0; i < numElements; ++i) {
         this.dataStore[i] = i;
       }
       this.gaps = [5,3,1];
     }
-  
+
     setData() {
       for (let i = 0; i < this.numElements; ++i) {
         this.dataStore[i] = Math.floor(Math.random() * (this.numElements + 1));
       }
     }
-  
+
     toString() {
       const dsLength = this.dataStore.length;
       let retstr = "";
-  
+
       for (let i = 0; i < dsLength; ++i) {
         retstr += this.dataStore[i] + " ";
         if (i > 0 && i % 10 == 0) {
           retstr += "\n";
         }
       }
-  
+
       return retstr;
     }
-  
+
     clear() {
       const dsLength = this.dataStore.length;
-  
+
       for (let i = 0; i < tdsLength; ++i) {
         this.dataStore[i] = 0;
       }
     }
-  
+
     insert(element) {
       this.dataStore[this.pos++] = element;
     }
-  
+
     swapBasic(arr, index1, index2) {
       const temp = arr[index1];
-  
+
       arr[index1] = arr[index2];
       arr[index2] = temp;
     }
 
     swap(array, index1, index2) {
-        // trick of es6  : (destructing)   [ [source --> target] ] =  [ [target <-- source] ])   (assignations)  
+        // trick of es6  : (destructing)   [ [source --> target] ] =  [ [target <-- source] ])   (assignations)
         [ array[index1], array[index2] ] = [ array[index2], array[index1] ];
         // now because the array position( array[indexX] ) still linked the values are updated
     }
@@ -84,7 +84,7 @@ class CArray {
         do {
           swapped = false;
           for(let i = 0; i < array.length; i++) {
-            if(array[i] && array[i + 1] && array[i] > array[i + 1]) { 
+            if(array[i] && array[i + 1] && array[i] > array[i + 1]) {
               this.swap(this.dataStore, i, i + 1);
               swapped = true;
             }
@@ -109,7 +109,7 @@ class CArray {
 
     insertionSort() {
         let temp, inner;
-        
+
         for (let outer = 1; outer < this.numElements; outer++) {
             temp = this.dataStore[outer];
             inner = outer;
@@ -125,18 +125,18 @@ class CArray {
         this.gaps = arr;
     }
     /**
-     * The outer loop controls the movement within the gap sequence. In other words, for the 
+     * The outer loop controls the movement within the gap sequence. In other words, for the
      * first pass through the data set, the algorithm is going to examine elements that are five
-     * elements away from each other. 
-     * 
-     * The next pass will examine elements that are three elements away from each other. 
-     * 
-     * The last pass performs a standard insertion sort on element that are one place away, 
-     * which means they are adjacent. 
-     * 
-     * By the time this last pass begins, many of the elements will already be in place, and the algorithm 
+     * elements away from each other.
+     *
+     * The next pass will examine elements that are three elements away from each other.
+     *
+     * The last pass performs a standard insertion sort on element that are one place away,
+     * which means they are adjacent.
+     *
+     * By the time this last pass begins, many of the elements will already be in place, and the algorithm
      * won’t have to exchange many elements. This is where the algorithm gains efficiency over insertion sort.
-     * 
+     *
      * @memberof CArray
      */
     shellsort() {
@@ -148,15 +148,16 @@ class CArray {
                     this.dataStore[j] = this.dataStore[j - this.gaps[g]];
                 }
 
-                this.dataStore[j] = temp;
+                // this.dataStore[j] = temp; // error
+                this.dataStore[i] = temp;
             }
         }
     }
     /**
      * shellsort() with a dynamically computed gap sequence
-     * 
+     *
      * In my test this method was more 10x faster
-     * 
+     *
      * @memberof CArray
      */
     shellsortDynamic() {
@@ -170,10 +171,10 @@ class CArray {
         while (h >= 1) {
             for (let i = h; i < N; i++) {
                 for (let j = i; j >= h && this.dataStore[j] < this.dataStore[j-h]; j -= h) {
-                    swap(this.dataStore, j, j-h);
+                    this.swap(this.dataStore, j, j-h);
                 }
             }
-            
+
             h = (h-1)/3;
         }
     }
@@ -207,11 +208,11 @@ class CArray {
             right array - 3,5,Infinity
 
             1,2,3,4,5,6,7,8,9,10
-        
+
         The value Infinity is used as a sentinel value to indicate the end of either the left or
         right subarray.
-     * 
-     * @param {array} [arr=this.dataStore] 
+     *
+     * @param {array} [arr=this.dataStore]
      * @returns {void}
      * @memberof CArray
      */
@@ -242,12 +243,12 @@ class CArray {
     }
     /**
      * mergeSort's helper
-     * 
-     * @param {any} arr 
-     * @param {any} startLeft 
-     * @param {any} stopLeft 
-     * @param {any} startRight 
-     * @param {any} stopRight 
+     *
+     * @param {any} arr
+     * @param {any} startLeft
+     * @param {any} stopLeft
+     * @param {any} startRight
+     * @param {any} stopRight
      * @memberof CArray
      */
     mergeArrays(arr, startLeft, stopLeft, startRight, stopRight) {
@@ -295,8 +296,8 @@ class CArray {
 
             3. Repeat steps 1 and 2 on both the list with smaller elements and the list of larger
             elements.
-     * 
-     * @param {array} [list=this.dataStore] 
+     *
+     * @param {array} [list=this.dataStore]
      * @returns {array} sortedArray
      * @memberof CArray
      */
@@ -305,11 +306,15 @@ class CArray {
             return [];
         }
 
+        if (list.length == 1) {
+            return list;
+        }
+
         const lesser  = [],
               greater = [],
               pivot   = list[0],
               lLength = list.length;
-              
+
         for (let i = 1; i < lLength; i++) {
                 if (list[i] < pivot) {
                 lesser.push(list[i]);
@@ -345,7 +350,7 @@ console.group('Shellsort Ordered array');
 
     elapsed = stop - start;
     console.log(` \n The Shellsort elapsed time was: ${elapsed} milliseconds.`);
-console.groupEnd();//  The Shellsort elapsed time was: 33 milliseconds.
+console.groupEnd();//  The Shellsort elapsed time was: 0 milliseconds.
 
 
 console.group('Shellsort Ordered array with a dynamically computed gap sequence');
@@ -357,7 +362,7 @@ console.group('Shellsort Ordered array with a dynamically computed gap sequence'
 
     elapsed = stop - start;
     console.log(` \n The Shellsort elapsed time was: ${elapsed} milliseconds.`);
-console.groupEnd();// The Shellsort elapsed time was: 2 milliseconds.
+console.groupEnd();// The Shellsort elapsed time was: 0,1 and 2 milliseconds.
 
 
 
@@ -370,7 +375,7 @@ console.group('mergeSort Ordered array');
 
     elapsed = stop - start;
     console.log(` \n The mergeSort elapsed time was: ${elapsed} milliseconds.`);
-console.groupEnd();// The Shellsort elapsed time was: 2 milliseconds.
+console.groupEnd();// The mergeSort elapsed time was: 2 milliseconds.
 
 
 
@@ -383,6 +388,7 @@ console.group('quickSort Ordered array');
 
     elapsed = stop - start;
     console.log(` \n The quickSort elapsed time was: ${elapsed} milliseconds.`);
-console.groupEnd();// The quickSort elapsed time was: 72 milliseconds.
+console.groupEnd();// The quickSort elapsed time was: 15 milliseconds if printed and 13 just returning result in the browser with an  array of 10000 numbers.
+
 // NOTE: the recursion process cause that testing in the browser inspector console throw an stack error: Uncaught RangeError: Maximum call stack size exceeded
-// be aware of that and test the quickSort() method with lower sets of data.
+// be aware of that and test the quickSort() method with lower sets of data or independently.

@@ -91,7 +91,7 @@ console.log(s.peek());
             } while (num > 0);
             var converted = "";
             while (s.length() > 0) {
-                converted += s.pop();
+                converted += s.pop().toString();
             }
             return converted;
         }

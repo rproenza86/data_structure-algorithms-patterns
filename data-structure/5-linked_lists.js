@@ -36,7 +36,7 @@ function find(item) {
     currNode = currNode.next;
   }
 
-  return currNode; // this will be the next element or null
+  return  ( currNode.element == item) ? currNode : false;
 }
 
 function findPrevious(item) {
@@ -53,8 +53,13 @@ function insert(newElement, parentElement = new Node("")) {
     const newNode = new Node(newElement);
     const parentNode = this.find(parentElement);
 
-    newNode.next = parentNode && parentNode.next;
-    parentNode.next = newNode;
+    if(parentNode) {
+      newNode.next = parentNode && parentNode.next;
+      parentNode.next = newNode;
+      return true;
+    } else {
+      return false;
+    }
 }
 
 function remove(item) {

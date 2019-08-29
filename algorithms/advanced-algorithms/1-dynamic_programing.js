@@ -88,12 +88,12 @@
          */
         function dynamicFib(n) {
           let last     = 1,
-              nextLast = 1,
+              prevLast = 1,
               result   = 1;
 
-          for (let i = 2; i < n; ++i) {
-            result = last + nextLast;
-            nextLast = last;
+          for (let i = 2; i <= n; ++i) {
+            result = prevLast + last;
+            prevLast = last;
             last = result;
           }
           

@@ -174,7 +174,7 @@ class Graph {
    * @param {function}          [fn=x => console.log(x)]
    * @memberof Graph
    */
-  _traverseDFS(vertex = -1, visited = [], fn = x => console.log(x)) {
+  _traverseDFS(vertex = -1, visited = [], fn) {
     visited[vertex] = true;
     if (this.edges[vertex] !== undefined) {
       fn(vertex);
@@ -187,6 +187,17 @@ class Graph {
   }
   /**
    * Breadth-first search method.
+   * Breadth-First Search Leads to Shortest Paths
+    * 
+    *  When we perform a breadth-first search, we are automatically finding the shortest paths
+      from one vertex to another connected vertex.
+
+      For example, when we want to find the shortest path from vertex A to vertex D, we first 
+      look for any one-edge paths from A to D, then two-edge paths from A to D, and so on.
+
+      This is exactly the way breadth-first search works, so we can easily modify the breadth-first 
+      search algorithm to find shortest paths.
+          
    *
    * @param {number || string} [vertex=-1]
    * @param {function}         [fn=x => console.log(x)]
@@ -197,8 +208,10 @@ class Graph {
     if (!~this.vertices.indexOf(vertex)) {
       return console.log("Vertex not found");
     }
+
     const queue = [];
     queue.push(vertex);
+
     const visited = [];
     visited[vertex] = true;
 
@@ -225,14 +238,18 @@ class Graph {
     if (!~this.vertices.indexOf(vertexSource)) {
       return console.log("Vertex not found");
     }
+
     const queue = [];
     queue.push(vertexSource);
+
     const visited = [];
     visited[vertexSource] = true;
+
     const paths = [];
 
     while (queue.length) {
       const vertex = queue.shift();
+
       for (let i = 0; i < this.edges[vertex].length; i++) {
         if (!visited[this.edges[vertex][i]]) {
           visited[this.edges[vertex][i]] = true;
@@ -242,6 +259,7 @@ class Graph {
         }
       }
     }
+
     if (!visited[vertexDestination]) {
       return undefined;
     }

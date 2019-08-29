@@ -232,7 +232,7 @@
                 }
 
                 if (current == null) {
-                    return null;
+                    return -1;
                 }
             }
 

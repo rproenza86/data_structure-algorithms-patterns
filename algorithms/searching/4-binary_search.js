@@ -425,6 +425,7 @@ class CArray {
                 return middle;
             }
         }
+
         return -1;
     }
 }

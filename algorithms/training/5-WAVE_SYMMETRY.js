@@ -64,7 +64,7 @@ module.exports = {
 	}
 };
 
-// not yet, the Array.sort() i not optimus 
+// not yet, the Array.sort() is not optimums 
 module.exports = { 
 	//param A : array of integers
 	//return a array of integers

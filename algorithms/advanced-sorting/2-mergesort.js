@@ -194,20 +194,28 @@ class CArray {
 
             left array - 6,Infinity
             right array - 10,Infinity
+
             left array - 1,Infinity
             right array - 9,Infinity
+
             left array - 4,Infinity
             right array - 8,Infinity
+
             left array - 2,Infinity
             right array - 7,Infinity
+
             left array - 3,Infinity
             right array - 5,Infinity
+
             left array - 6,10,Infinity
             right array - 1,9,Infinity
+
             left array - 4,8,Infinity
             right array - 2,7,Infinity
+
             left array - 1,6,9,10,Infinity
             right array - 2,4,7,8,Infinity
+
             left array - 1,2,4,6,7,8,9,10,Infinity
             right array - 3,5,Infinity
 
@@ -222,7 +230,7 @@ class CArray {
      */
     mergeSort(arr = this.dataStore) {
         if (arr.length < 2) {
-            return;
+            return arr;
         }
 
         const arrLength = arr.length;
