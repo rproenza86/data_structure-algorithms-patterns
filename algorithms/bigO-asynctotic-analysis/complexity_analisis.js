@@ -5,8 +5,10 @@
  * Focused on the worst case scenario.
  *
  * Why is important to know this?
- * Knowing Big O helps and facilitates developers being aware of the efficiency of an algorithm so they can
+ * - Knowing Big O helps and facilitates developers being aware of the efficiency of an algorithm so they can
  * create applications with good performance.
+ * - The Big-O notation measures the worst-case complexity of an algorithm.
+ * - Answer the question: What will happen as n approaches infinity?
  *
  * The letter O is used because the rate of growth of a function is also called order of the function.
  *
@@ -32,6 +34,8 @@ getLast(['a', 'b', 'c', 'd', 'e', 'f', 'g']);
 /**
      * Linear-Time Algorithm
         O(N) — “Order N”
+
+        Applies to algorithms that must do n operations in the worst-case scenario.
 
         In this order, the worst case time (iterations) grows on par with the number of items.
      */
@@ -109,7 +113,7 @@ const quickSort = list => {
       case list[i] >= pivot:
         if (list[i]) right.push(list[i]);
         break;
-    } 
+    }
   }
 
   return [].concat(quickSort(left), pivot, quickSort(right));
